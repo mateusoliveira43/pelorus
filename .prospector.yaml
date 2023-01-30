@@ -1,0 +1,10 @@
+strictness: veryhigh
+test-warnings: true
+member-warnings: true
+max-line-length: 120
+autodetect: false
+
+ignore-paths:
+  - exporters
+  - demo
+  - scripts

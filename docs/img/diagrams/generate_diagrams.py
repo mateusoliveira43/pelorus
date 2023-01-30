@@ -8,11 +8,11 @@ from diagrams.onprem.monitoring import Grafana, Prometheus
 
 
 # Overridden diagrams.c4.Container
-def CustomContainer(name, technology="", description=""):
-    return C4Node(name, technology=technology, description=description)
+def custom_container(name, technology="", description=""):
+    return c4_node(name, technology=technology, description=description)
 
 
-def C4Node(name, description="", **kwargs):
+def c4_node(name, description="", **kwargs):
     node_attributes = {
         "label": _format_node_label(name, description),
         "labelloc": "c",
@@ -54,23 +54,23 @@ graph_attr = {
     "pad": "0",
 }
 
-pelorus_icon = "../Icon-Pelorus-A-Standard-RGB_smaller.png"
+PELORUS_ICON = "../Icon-Pelorus-A-Standard-RGB_smaller.png"
 
 
 with Diagram("Pelorus Deployment steps", show=False, graph_attr=graph_attr):
     with Cluster("OpenShift Cluster"):
         users = Users("See measures")
-        pelorus_operator = Custom("Install\nPelorus Operator", pelorus_icon)
+        pelorus_operator = Custom("Install\nPelorus Operator", PELORUS_ICON)
 
         with Cluster("Create Pelorus instance"):
             (
                 pelorus_operator
-                >> CustomContainer("Configure")
+                >> custom_container("Configure")
                 >> [
-                    CustomContainer("Failure Exporter"),
-                    CustomContainer("Commit time Exporter"),
-                    CustomContainer("Deploy time Exporter"),
-                    CustomContainer("Pelorus Core"),
+                    custom_container("Failure Exporter"),
+                    custom_container("Commit time Exporter"),
+                    custom_container("Deploy time Exporter"),
+                    custom_container("Pelorus Core"),
                 ]
                 >> users
             )
@@ -83,7 +83,7 @@ with Diagram("Pelorus Overview", show=False, direction="TB", graph_attr=graph_at
 
         with Cluster("Pelorus Exporters"):
             core << [
-                Custom("Commit time\nexporter", pelorus_icon),
-                Custom("Failure\nexporter", pelorus_icon),
-                Custom("Deploy time\nexporter", pelorus_icon),
+                Custom("Commit time\nexporter", PELORUS_ICON),
+                Custom("Failure\nexporter", PELORUS_ICON),
+                Custom("Deploy time\nexporter", PELORUS_ICON),
             ]

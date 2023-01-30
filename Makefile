@@ -205,17 +205,14 @@ isort-check: $(PELORUS_VENV)
 
 # Linting
 
-.PHONY: lint python-lint pylava chart-lint chart-lint-optional shellcheck shellcheck-optional chart-check-bump typecheck
+.PHONY: lint python-lint chart-lint chart-lint-optional shellcheck shellcheck-optional chart-check-bump typecheck
 ## lint: lint python code, shell scripts, and helm charts
 lint: python-lint chart-lint-optional shellcheck-optional
 
 ## python-lint: lint python files
 python-lint: $(PELORUS_VENV)
-	@echo 🐍 🦙 Linting with pylama
 	. ${PELORUS_VENV}/bin/activate && \
-	pylama
-
-pylava: python-lint
+	prospector
 
 typecheck: $(PELORUS_VENV)
 	$(warning Type checking is not fully ready yet, the issues below may be ignorable)

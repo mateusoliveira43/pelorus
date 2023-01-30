@@ -1,6 +1,5 @@
 ![Pelorus](docs/img/Logo-Pelorus-A-Standard-RGB_smaller.png)
 
-![](https://github.com/redhat-cop/pelorus/workflows/Pylama/badge.svg)
 ![](https://github.com/redhat-cop/pelorus/workflows/Unit%20Tests/badge.svg)
 ![](https://github.com/redhat-cop/pelorus/workflows/Conftest/badge.svg)
 ![](https://github.com/redhat-cop/pelorus/workflows/Chart%20Lint/badge.svg)

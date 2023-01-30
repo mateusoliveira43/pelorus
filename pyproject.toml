@@ -16,14 +16,3 @@ addopts = [
     "--cov-report=html",
     "--cov=exporters",
 ]
-
-[tool.pylama]
-paths = "exporters scripts"
-skip = "exporters/.eggs/*"
-
-[tool.pylama.linter.pycodestyle]
-max_line_length = 120
-
-[[tool.pylama.files]]
-path = "exporters/tests/*"
-ignore= "W0401"

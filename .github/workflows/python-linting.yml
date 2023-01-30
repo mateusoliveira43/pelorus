@@ -1,4 +1,4 @@
-name: Pylava
+name: Python code linting
 on:
   pull_request:
     paths:
@@ -7,6 +7,7 @@ on:
       - 'pyproject.toml'
       - '.github/workflows/python-linting.yml'
       - 'Makefile'
+      - '.prospector.yaml'
 
 jobs:
   python-lint:

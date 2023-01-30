@@ -24,8 +24,6 @@ from tests.openshift_mocks import (
     ResourceGetResponse,
 )
 
-# pylava:ignore=W0401
-
 # region test constants
 APP_LABEL = pelorus.DEFAULT_APP_LABEL
 
