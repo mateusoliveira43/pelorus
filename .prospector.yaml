@@ -6,5 +6,4 @@ autodetect: false
 
 ignore-paths:
   - exporters
-  - demo
   - scripts
