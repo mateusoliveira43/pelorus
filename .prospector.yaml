@@ -6,4 +6,4 @@ autodetect: false
 
 ignore-paths:
   - exporters
-  - scripts
+  - scripts/troubleshooting/missing_labels.py # open PR

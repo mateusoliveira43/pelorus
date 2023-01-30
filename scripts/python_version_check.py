@@ -13,7 +13,7 @@
 #    under the License.
 #
 
-from sys import executable, exit, version_info
+from sys import executable, version_info
 
 PYTHON_VER_MIN = (3, 9)
 PYTHON_VER_MAX = (3, 11)
@@ -22,8 +22,8 @@ SYS_PYTHON_VER = (version_info.major, version_info.minor)
 
 if not PYTHON_VER_MIN <= SYS_PYTHON_VER <= PYTHON_VER_MAX:
     print(
-        "{} needs to be between {}.{} and {}.{}, but was {}.{}".format(
-            executable, *PYTHON_VER_MIN, *PYTHON_VER_MAX, *SYS_PYTHON_VER
-        )
+        f"{executable} needs to be between {PYTHON_VER_MIN[0]}.{PYTHON_VER_MIN[1]} "
+        f"and {PYTHON_VER_MAX[0]}.{PYTHON_VER_MAX[1]}, but was "
+        f"{version_info.major}.{version_info.minor}"
     )
-    exit(1)
+    raise SystemExit(1)

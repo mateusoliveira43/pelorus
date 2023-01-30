@@ -14,7 +14,7 @@ endif
 SYS_PYTHON_VER=$(shell $(PYTHON_BINARY) -c 'from sys import version_info; \
   print("%d.%d" % version_info[0:2])')
 $(info Found system python version: $(SYS_PYTHON_VER));
-PYTHON_VER_CHECK=$(shell $(PYTHON_BINARY) scripts/python-version-check.py)
+PYTHON_VER_CHECK=$(shell $(PYTHON_BINARY) scripts/python_version_check.py)
 
 ifneq ($(strip $(PYTHON_VER_CHECK)),)
   $(error $(PYTHON_VER_CHECK). You may set the PYTHON_BINARY env var to specify a compatible version)

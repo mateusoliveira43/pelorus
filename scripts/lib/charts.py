@@ -1,4 +1,4 @@
-"""Functions related to linting and modifying helm charts"""
+"""Is it used? I think it is broken Functions related to linting and modifying helm charts"""
 
 import re
 import subprocess
@@ -16,8 +16,7 @@ def chart_yaml_path(chart_path: Path) -> Path:
     """
     if chart_path.is_dir():
         return chart_path / "Chart.yaml"
-    else:
-        return chart_path
+    return chart_path
 
 
 def get_next_patch(chart_path: Path) -> semver.VersionInfo:

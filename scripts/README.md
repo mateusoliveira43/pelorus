@@ -30,7 +30,7 @@ Contains common code used by python scripts.
 
 A pre-commit hook for git. Will lint helm charts, and check if formatting is correct.
 
-## python-version-check.py
+## python_version_check.py
 
 Used by the makefile to check if the python version is valid.
 

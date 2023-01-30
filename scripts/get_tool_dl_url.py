@@ -147,21 +147,36 @@ def oc_url():
         version = "stable"
 
     # I can't say for sure why arm64 bins are available under x86_64, but this isn't a typo.
-    BASE_URL = "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp"
-    return f"{BASE_URL}/{version}/openshift-client-{filename_suffix}.tar.gz"
+    base_url = "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp"
+    return f"{base_url}/{version}/openshift-client-{filename_suffix}.tar.gz"
 
 
 def get_latest_assets(repo: str) -> Iterable[ReleaseAsset]:
     "Get the release assets for the latest release."
     url = GITHUB_RELEASE_TEMPLATE.format(repo)
 
-    response = requests.get(url)
+    response = requests.get(url, timeout=60)
     response.raise_for_status()
 
     body = response.json()
 
     for asset in body["assets"]:
         yield ReleaseAsset.from_json(asset)
+
+
+def main(software: str) -> None:
+    if software == "oc":
+        print(oc_url())
+        return
+
+    tool = Tool[software]
+
+    for asset in get_latest_assets(tool.repo):
+        if tool.matcher(asset.url):
+            print(asset.url)
+            return
+
+    sys.exit(f"No matching download URL found for {software} on {OS} {ARCH}")
 
 
 CLI_NAMES = {name.replace("_", "-") for name in Tool._member_names_} | {"oc"}
@@ -177,17 +192,5 @@ parser.add_argument(
 
 if __name__ == "__main__":
     args = parser.parse_args()
-    software: str = args.software.replace("-", "_")
 
-    if software == "oc":
-        print(oc_url())
-        sys.exit()
-
-    tool = Tool[software]
-
-    for asset in get_latest_assets(tool.repo):
-        if tool.matcher(asset.url):
-            print(asset.url)
-            sys.exit()
-
-    sys.exit(f"No matching download URL found for {software} on {OS} {ARCH}")
+    main(args.software.replace("-", "_"))
